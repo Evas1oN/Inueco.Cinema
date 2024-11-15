@@ -1,0 +1,19 @@
+name: Deploy
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v4.1.0
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.1.0
+      - name: Setup vite
+        run: npm install --global vite
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: build
+        run: make build
+            
+      
+            
