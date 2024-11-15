@@ -6,7 +6,7 @@ build:
 	  --configuration Release \
 	  --os linux \
 	  --output dist/ \
-	  && (cd app/ && vite build)
+	  && (cd app/ && npm install && npx vite build)
 
 run_frontend:
 	(cd app && vite build --watch)
