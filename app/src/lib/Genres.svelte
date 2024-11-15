@@ -61,14 +61,17 @@
 
 <br/>
 <form on:submit={submit}>
-    <label for="name">
-        {#if selectedGenre.id != DEFAULT_GUID}
-            <strong>{selectedGenre.id}</strong>
-        {:else}
-            Наименование
-        {/if}
-    </label>
-    <input bind:value="{selectedGenre.name}"/>
+    <fieldset>
+        <label for="name">
+            {#if selectedGenre.id != DEFAULT_GUID}
+                <strong>{selectedGenre.id}</strong>
+            {:else}
+                Наименование
+            {/if}
+        </label>
+        <input bind:value="{selectedGenre.name}"/>
+    </fieldset>
+
     <button type="submit">Отправить</button>
 
     {#if selectedGenre.id != DEFAULT_GUID}
@@ -81,7 +84,7 @@
 
 
 {#await awaiter}
-    <p>Loading...</p>
+    <article aria-busy="true"></article>
 {:then data}
     <table>
         <thead>

@@ -1,6 +1,5 @@
 import { mount } from 'svelte'
-import './pico.orange.min.css'
-import './app.css'
+import './pico.min.css'
 import App from './App.svelte'
 
 const app = mount(App, {

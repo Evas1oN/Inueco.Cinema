@@ -3,6 +3,7 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+secrets.env
 .vscode
 *.sqlite
 # Logs
