@@ -18,5 +18,6 @@ app.MapFallbackToFile("index.html").AllowAnonymous();
 
 app.Register<Genre>("/api/genres");
 app.Register<Film>("/api/films");
+app.Register<Session>("/api/sessions");
 
 app.Run();

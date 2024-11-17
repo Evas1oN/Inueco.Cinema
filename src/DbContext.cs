@@ -17,5 +17,6 @@ public class CinemaContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Film>().Navigation(e => e.Genre).AutoInclude();
+        modelBuilder.Entity<Session>().Navigation(f => f.Film).AutoInclude();
     }
 }
