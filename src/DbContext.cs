@@ -8,6 +8,7 @@ public class CinemaContext : DbContext
     public DbSet<Film> Films => Set<Film>();
     public DbSet<Genre> Genres => Set<Genre>();
     public DbSet<Session> Sessions => Set<Session>();
+    public DbSet<User> Users => Set<User>();
     public CinemaContext(DbContextOptions options) : base(options) { 
         Database.EnsureCreated();
     }

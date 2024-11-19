@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inueco.Cinema.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    [Migration("20241115190543_SessionUpdate")]
-    partial class SessionUpdate
+    [Migration("20241119070909_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,25 @@ namespace Inueco.Cinema.Migrations
                     b.HasIndex("FilmId");
 
                     b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("Inueco.Cinema.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Inueco.Cinema.Models.Film", b =>

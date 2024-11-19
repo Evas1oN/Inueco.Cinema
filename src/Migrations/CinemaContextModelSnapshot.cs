@@ -74,6 +74,25 @@ namespace Inueco.Cinema.Migrations
                     b.ToTable("Sessions");
                 });
 
+            modelBuilder.Entity("Inueco.Cinema.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Inueco.Cinema.Models.Film", b =>
                 {
                     b.HasOne("Inueco.Cinema.Models.Genre", "Genre")
