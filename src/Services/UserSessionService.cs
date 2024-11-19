@@ -2,7 +2,7 @@ using Inueco.Cinema.Models;
 
 namespace Inueco.Cinema.Services;
 
-public class UserSessionService() {
+public class UserSessionService {
     private Dictionary<Guid, User> _userTokens = [];
 
     public Guid CreateToken(User user) {

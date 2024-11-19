@@ -35,9 +35,6 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v4.1.8
 
-      - name: debug
-        run: ls artifact/ -lh
-          
       - name: Docker Setup Buildx
         uses: docker/setup-buildx-action@v3.7.1
     

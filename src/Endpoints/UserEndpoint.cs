@@ -11,8 +11,6 @@ public static class UserEndpoint {
     private const string SALT = "c2FsdAo=";
     private const string COOKIE_NAME = "user.token";
 
-    
-
     private static string HashPassword(string password) {
         return Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password,
@@ -58,7 +56,7 @@ public static class UserEndpoint {
             var token = session.CreateToken(query);
             
             CookieOptions cookieOptions = new() {
-                SameSite= SameSiteMode.Strict,
+                SameSite = SameSiteMode.Strict,
                 Secure = true
             };
 

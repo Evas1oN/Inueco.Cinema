@@ -112,11 +112,14 @@
 {:then data} 
     {#each data as session, id}
         <article>
-            <header class="grid"><h4>{session.film.name}</h4> <button on:click={() => selectedSession = session}>Выбрать</button></header>
-            <footer>
-                <p>{formatTime(session.startTime).toLocaleString()}</p>
-                <p>{formatTime(session.endTime).toLocaleString()}</p>
-            </footer>
+            <header class="grid"><h4>{session.film.name} ({session.film.genre.name})</h4> <button on:click={() => selectedSession = session}>Выбрать</button></header>
+
+            <div class="grid">
+                <img src="{session.film.posterUrl}" alt="Poster" style="max-height: 14rem;"/>
+                <p>{formatTime(session.startTime).toLocaleString()} - {formatTime(session.endTime).toLocaleString()}</p>
+            </div>
         </article>
     {/each}
+{:catch err}
+    {err}
 {/await}
