@@ -16,8 +16,9 @@ public class CinemaContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
+        
         modelBuilder.Entity<Film>().Navigation(e => e.Genre).AutoInclude();
         modelBuilder.Entity<Session>().Navigation(f => f.Film).AutoInclude();
+        modelBuilder.Entity<User>().Navigation(f => f.FavouriteFilms).AutoInclude();
     }
 }

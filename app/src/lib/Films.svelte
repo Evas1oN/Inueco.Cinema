@@ -1,5 +1,7 @@
 <script>
     const DEFAULT_GUID = "00000000-0000-0000-0000-000000000000"
+    import { get } from "svelte/store";
+    import { user } from "../stores/user";
 
     let selectedFilm =  {
         id: DEFAULT_GUID,
@@ -63,6 +65,18 @@
             posterUrl: ""
         }
     }
+
+    function favourite(film) {
+        fetch(`/api/favourites/${get(user).id}`, {
+            method: "POST",
+            body: JSON.stringify(film),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json()).then(data => console.log(data))
+        .catch(err => console.error(err))
+    }
 </script>
 
 
@@ -95,7 +109,7 @@
         </label>
     </div>
 
-
+    
 
     <img style="max-height: 10rem;" alt="poster here" src="{selectedFilm.posterUrl}"/>
     <button type="submit">Отправить</button>
@@ -121,7 +135,12 @@
                     <td><img style="max-height: 10rem;" src="{film.posterUrl}" alt="Poster"/></td>
                     <td>{film.name}</td>
                     <td>{film.genre.name}</td>
-                    <td><button on:click={() => remove(film.id)}>Удалить</button></td>
+                    <td>
+                        <div class="grid">
+                            <button on:click={() => remove(film.id)}>Удалить</button>
+                            <button on:click={() => favourite(film)}>Избранное</button>
+                        </div>
+                    </td>
                 </tr>
             {/each}
         </tbody>

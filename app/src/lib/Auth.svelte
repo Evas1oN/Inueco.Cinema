@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { user } from "../stores/user";
 
     export let User = undefined
     let UserData = {
@@ -7,12 +8,15 @@
     password: ""
     }
 
+    
 
     onMount(async () => {
       let response = await fetch("/api/auth")
       if (response.ok) {
-        User = await response.json();
+        user.set(await response.json());
+        return;
       }
+      throw(response.statusText)
     })
 
     /**
@@ -32,9 +36,10 @@
 
       let response = await fetch("/api/auth", { method: "POST", body: JSON.stringify(UserData), headers: { "Content-Type": "application/json" }})
       if (response.ok) {
-        response.json().then(data => User = data)
+        response.json().then(data => user.set(data))
       }
     }
+    
 </script>
 
 <br>
@@ -44,11 +49,11 @@
         <form on:submit={register}>
             <fieldset>
                 <label>Имя пользователя
-                <input bind:value={UserData.username}/>
+                  <input bind:value={UserData.username}/>
                 </label>
         
                 <label>Пароль
-                <input type="password" bind:value={UserData.password}/>
+                  <input type="password" bind:value={UserData.password}/>
                 </label>
             </fieldset>
         

@@ -1,11 +1,31 @@
 <script>
-  import { onMount } from "svelte";
   import Cinema from "./lib/Cinema.svelte";
   import Films from "./lib/Films.svelte";
   import Genres from "./lib/Genres.svelte";
   import Auth from "./lib/Auth.svelte";
+  import { user } from "./stores/user";
+  import { get } from "svelte/store";
+  import { onMount } from "svelte";
 
-  let User = undefined
+  let auth = false;
+
+  user.subscribe(value => {
+    if (value != undefined) {
+      auth = true;
+      return;
+    }
+    auth = false;
+  })
+
+  onMount(async () => {
+    let response = await fetch("/api/auth")
+    console.log(get(user))
+    if (response.ok) {
+      user.set(await response.json());
+      return;
+    }
+    user.set(undefined)
+  })
 
   let selectedComponent = null
   let components = [
@@ -24,9 +44,9 @@
   ]
 </script>
 
-{#if User == undefined}
+{#if !auth}
   <div class="container">
-    <Auth bind:User={User}/>
+    <Auth />
   </div>
 {/if}
 
@@ -35,13 +55,13 @@
   <ul>
     <li>
       <strong>Inueco</strong>
-      {#if User != undefined}
-        ({User.username})
+      {#if auth}
+        ({get(user).username})
       {/if}
     </li>
   </ul>
 
-  {#if User != undefined}
+  {#if auth}
     <ul>
       {#each components as component}
         {#if selectedComponent == component.instance}

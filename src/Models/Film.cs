@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Inueco.Cinema.Models;
 
 public class Film {
@@ -6,4 +8,7 @@ public class Film {
     public required Guid GenreId { get; set; }
     public string? PosterUrl { get; set; }
     public Genre? Genre { get; set; }
+
+    [JsonIgnore]
+    public List<User>? FavouriteByUsers { get; set; }
 }
