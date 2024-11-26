@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inueco-cinema
+spec:
+  selector:
+    matchLabels:
+      app: inueco-cinema
+  template:
+    metadata:
+      labels:
+        app: inueco-cinema
+    spec:
+      containers:
+        - name: inueco-cinema
+          imagePullPolicy: Always
+          image: "git.evas1on.me/evas1on/inueco.cinema:latest"
+          volumeMounts:
+            - mountPath: /data
+              name: inueco-cinema-vol
+          env:
+            - name: DB_PATH
+              value: "/data/db.sqlite"
+          ports:
+            - containerPort: 5000
+      volumes:
+        - name: inueco-cinema-vol
+          hostPath:
+            path: /var/k3s/inueco-cinema/
