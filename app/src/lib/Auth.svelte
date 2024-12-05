@@ -8,7 +8,7 @@
     password: ""
     }
 
-    
+    let oldway = false;
 
     onMount(async () => {
       let response = await fetch("/api/auth")
@@ -42,40 +42,63 @@
     
 </script>
 
+<input type="checkbox" bind:checked={oldway}/>
+
 <br>
+
+{#if oldway}
 <div class="grid">
-    <div>
-        <h3>Регистрация</h3>
-        <form on:submit={register}>
-            <fieldset>
-                <label>Имя пользователя
-                  <input bind:value={UserData.username}/>
-                </label>
-        
-                <label>Пароль
-                  <input type="password" bind:value={UserData.password}/>
-                </label>
-            </fieldset>
-        
-            <button type="submit">Регистрация</button>
-        </form>
-    </div>
-
-
-    <div>
-        <h3>Вход</h3>
-        <form on:submit={login}>
-            <fieldset>
-                <label>Имя пользователя
+  <div>
+      <h3>Регистрация</h3>
+      <form on:submit={register}>
+          <fieldset>
+              <label>Имя пользователя
                 <input bind:value={UserData.username}/>
-                </label>
-        
-                <label>Пароль
+              </label>
+      
+              <label>Пароль
                 <input type="password" bind:value={UserData.password}/>
-                </label>
-            </fieldset>
-        
-            <button type="submit">Вход</button>
-            </form>
-    </div>
+              </label>
+          </fieldset>
+      
+          <button type="submit">Регистрация</button>
+      </form>
+  </div>
+
+
+  <div>
+      <h3>Вход</h3>
+      <form on:submit={login}>
+          <fieldset>
+              <label>Имя пользователя
+              <input bind:value={UserData.username}/>
+              </label>
+      
+              <label>Пароль
+              <input type="password" bind:value={UserData.password}/>
+              </label>
+          </fieldset>
+      
+          <button type="submit">Вход</button>
+          </form>
+  </div>
 </div>
+{:else }
+<div>
+  <h3>Вход</h3>
+  <form>
+      <fieldset>
+          <label>Имя пользователя
+          <input bind:value={UserData.username}/>
+          </label>
+  
+          <label>Пароль
+          <input type="password" bind:value={UserData.password}/>
+          </label>
+      </fieldset>
+  
+      <button on:click={login} type="submit">Вход</button>
+      <button on:click={register} type="submit">Регистрация</button>
+      </form>
+</div>
+{/if}
